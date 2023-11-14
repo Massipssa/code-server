@@ -8,8 +8,8 @@ auth:
 
 deploy:
   image:
-    repository: massipssa
-    name: coder-server
+    registry: docker.io
+    repository: massipssa/coder-server
     tag: 0.0.1
     pullPolicy: IfNotPresent
   replicaCount: 1

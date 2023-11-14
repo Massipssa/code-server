@@ -17,7 +17,7 @@ spec:
     secretName: tls-secret
 
   rules:
-  - host: {{ .Values.ingress.path }}
+  - host: {{ .Values.ingress.hostname }}
     http:
       paths:
       - path: /
