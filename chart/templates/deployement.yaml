@@ -20,9 +20,12 @@ spec:
         imagePullPolicy: {{ .Values.deploy.image.pullPolicy | quote }}
         name: {{ include "coder.name" . }}
         ports:
-        - containerPort: {{ .Values.service.targetPort }}
+        - containerPort: {{ .Values.deploy.containerPorts.http }}
         env:
           {{- if  ".Values.auth.usePassword" }}
           - name: PASSWORD
             value: {{ .Values.auth.password }}
           {{- end}}
+        {{- if .Values.deploy.resources }}
+        resources: {{ - toYaml .Values.web.resources | nindent 12 }}
+        {{- end }}
