@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: code-server
+  name: code-server
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+      - image: "{{ .Values.deploy.image.repository }}/{{ .Values.deploy.image.name }}:{{ .Values.deploy.image.tag }}" #linuxserver/code-server:latest #massipssa/coder-server:0.0.1
+        imagePullPolicy: IfNotPresent
+        name: code-server
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PASSWORD
+          value: "code321"
