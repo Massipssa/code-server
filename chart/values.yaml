@@ -2,15 +2,29 @@ namespace: code-server
 
 nameOverride: ""
 
+auth:
+  usePassword: false
+  password: code321
+
 deploy:
   image:
     repository: massipssa
     name: coder-server
     tag: 0.0.1
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
 service:
   ports:
     http: 8080
-
   port: 80
   targetPort: 8080
+
+
+ingress:
+  enabled: false
+  ingressClassName: ""
+  hostname: coder.local
+  pathType: Prefix
+  path: /

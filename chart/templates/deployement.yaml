@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: code-server
+  replicas: {{ .Values.deploy.replicaCount }}
   template:
     metadata:
       labels:
@@ -16,10 +17,12 @@ spec:
     spec:
       containers:
       - image: "{{ .Values.deploy.image.repository }}/{{ .Values.deploy.image.name }}:{{ .Values.deploy.image.tag }}"
-        imagePullPolicy: IfNotPresent
-        name: code-server
+        imagePullPolicy: {{ .Values.deploy.image.pullPolicy | quote }}
+        name: {{ include "coder.name" . }}
         ports:
         - containerPort: {{ .Values.service.targetPort }}
         env:
-        - name: PASSWORD
-          value: "code321"
+          {{- if  ".Values.auth.usePassword" }}
+          - name: PASSWORD
+            value: {{ .Values.auth.password }}
+          {{- end}}
