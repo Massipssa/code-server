@@ -1,11 +1,16 @@
 namespace: code-server
 
+nameOverride: ""
+
 deploy:
   image:
-    repository: linuxserver
-    name: code-server
-    tag: latest
+    repository: massipssa
+    name: coder-server
+    tag: 0.0.1
 
 service:
+  ports:
+    http: 8080
+
   port: 80
   targetPort: 8080

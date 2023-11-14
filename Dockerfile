@@ -1,4 +1,4 @@
-FROM codercom/code-server:latest
+FROM linuxserver/code-server:latest
 
 ENV PYTHON_VERSION=3.9
 

@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: code-server
-  name: code-server
-  namespace: {{ .Values.namespace }}
+  name: {{ include "coder.name" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   selector:
     matchLabels:
@@ -15,11 +15,11 @@ spec:
         app: code-server
     spec:
       containers:
-      - image: "{{ .Values.deploy.image.repository }}/{{ .Values.deploy.image.name }}:{{ .Values.deploy.image.tag }}" #linuxserver/code-server:latest #massipssa/coder-server:0.0.1
+      - image: "{{ .Values.deploy.image.repository }}/{{ .Values.deploy.image.name }}:{{ .Values.deploy.image.tag }}"
         imagePullPolicy: IfNotPresent
         name: code-server
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.service.targetPort }}
         env:
         - name: PASSWORD
           value: "code321"
