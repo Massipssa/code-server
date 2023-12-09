@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
+  labels: 
     app: code-server
   name: {{ include "coder.name" . }}
   namespace: {{ .Release.Namespace | quote }}
@@ -22,10 +22,21 @@ spec:
         ports:
         - containerPort: {{ .Values.deploy.containerPorts.http }}
         env:
-          {{- if  ".Values.auth.usePassword" }}
+          {{- if .Values.auth.usePassword }}
           - name: PASSWORD
-            value: {{ .Values.auth.password }}
+            valueFrom: 
+              secretKeyRef: 
+                name:  {{ include "coder.secretName" . }}
+                key: password
           {{- end}}
+        volumeMounts:
+        - name: pv-code-server
+          mountPath: /config
+
         {{- if .Values.deploy.resources }}
         resources: {{- toYaml .Values.deploy.resources | nindent 12 }}
         {{- end }}
+      volumes:
+      - name: pv-code-server
+        persistentVolumeClaim:
+          claimName: pvc-code-server   

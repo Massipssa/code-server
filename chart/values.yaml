@@ -2,9 +2,12 @@ namespace: code-server
 
 nameOverride: ""
 
+commonLabels:
+  app: code-server
+
 auth:
-  usePassword: false
-  password: code321
+  usePassword: true
+  existingSecret: ""
 
 deploy:
   image:
@@ -27,7 +30,7 @@ service:
 
 
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: ""
   hostname: coder.local
   pathType: Prefix

@@ -13,6 +13,18 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Get the secret name
+*/}}
+{{- define "coder.secretName" -}}
+{{- if .Values.auth.existingSecret -}}
+  {{- printf "%s" .Values.auth.existingSecret -}}
+{{- else -}}
+  {{- printf "%s" (include "coder.name" .) -}}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
 Return the proper image name
 {{ include "common.images.image" ( dict "imageRoot" .Values.path.to.the.image "global" .Values.global ) }}
 */}}
