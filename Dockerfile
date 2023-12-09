@@ -7,29 +7,29 @@ ENV PYTHON_VERSION=3.9
 # install core packages
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-      sudo \
-      wget \
-      curl \
-      unzip \
-      make \
-      openjdk-11-jdk \
-      build-essential \
-      software-properties-common \
-      libpq-dev \
-      gcc \
-      g++ \
-      libsasl2-dev \
+    sudo \
+    wget \
+    curl \
+    unzip \
+    make \
+    openjdk-11-jdk \
+    build-essential \
+    software-properties-common \
+    libpq-dev \
+    gcc \
+    g++ \
+    libsasl2-dev \
 	  libsasl2-2 \
 	  libsasl2-modules-gssapi-mit \
-      unixodbc-dev \
-      ssh \
-      netcat \
-      inetutils-ping \
-      net-tools \
-      vim \
-      bash-completion \
-      netcat \
-      ncdu \
+    unixodbc-dev \
+    ssh \
+    netcat \
+    inetutils-ping \
+    net-tools \
+    vim \
+    bash-completion \
+    netcat \
+    ncdu \
     && rm -rf /var/lib/apt/lists/*
 
 ## Install python
