@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-code-server
+  name: {{ printf "pvc-%s" (include "coder.name" .) }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.pvc.accessMode }} 
   resources:
     requests:
-      storage: 1Gi
+      storage: {{ .Values.pvc.storage }}

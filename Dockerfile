@@ -1,6 +1,7 @@
 FROM linuxserver/code-server:latest
 
 ENV PYTHON_VERSION=3.9
+ENV HELM_VERSION=v3.10.1
 
 #USER root
 
@@ -41,7 +42,6 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     && mv ./kubectl /usr/local/bin
 
 ### Install Helm
-ENV HELM_VERSION=v3.10.1
 ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 ENV HELM_URL https://get.helm.sh/${HELM_FILENAME}
 

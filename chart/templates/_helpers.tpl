@@ -23,6 +23,27 @@ Get the secret name
 {{- end -}}
 {{- end -}}
 
+{{/*
+Get PVC name
+*/}}
+{{- define "coder.pvcName" -}}
+{{- if .Values.pvc.existingPvc -}}
+  {{- printf "%s" .Values.pvc.existingPvc -}}
+{{- else -}}
+  {{- printf "pvc-%s" (include "coder.name" .) -}}
+{{- end -}}
+{{- end -}}  
+
+{{/*
+Get service account name
+*/}}
+{{- define "coder.serviceAccount" -}}
+{{- if .Values.serviceAccount.create }}
+  {{ default "default" .Values.serviceAccount.name }}
+{{- else -}}
+  {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Return the proper image name

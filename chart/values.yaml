@@ -5,9 +5,14 @@ nameOverride: ""
 commonLabels:
   app: code-server
 
+serviceAccount:
+  create: false
+  name: ""
+
 auth:
   usePassword: true
   existingSecret: ""
+  password: code321
 
 deploy:
   image:
@@ -35,3 +40,8 @@ ingress:
   hostname: coder.local
   pathType: Prefix
   path: /
+
+pvc:
+  existingPvc: ""
+  accessMode: ReadWriteOnce
+  storage: 1Gi

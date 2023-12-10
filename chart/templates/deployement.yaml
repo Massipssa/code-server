@@ -15,6 +15,7 @@ spec:
       labels:
         app: code-server
     spec:
+      serviceAccount: {{ include "coder.serviceAccount" . }}
       containers:
       - name: {{ include "coder.name" . }}
         imagePullPolicy: {{ .Values.deploy.image.pullPolicy | quote }}
@@ -39,4 +40,4 @@ spec:
       volumes:
       - name: pv-code-server
         persistentVolumeClaim:
-          claimName: pvc-code-server   
+          claimName:  {{ include "coder.pvcName" .}}   
