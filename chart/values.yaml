@@ -24,8 +24,12 @@ deploy:
   containerPorts:
     http: 8080
   resources:
-    limits: {}
-    requests: {}
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
 
 service:
   ports:
@@ -35,7 +39,7 @@ service:
 
 
 ingress:
-  enabled: true
+  enabled: false
   ingressClassName: ""
   hostname: coder.local
   pathType: Prefix
